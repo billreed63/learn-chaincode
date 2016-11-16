@@ -18,7 +18,6 @@ package main
 
 import (
 	"errors"
-	"strconv"
 	"fmt"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
@@ -87,11 +86,9 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
 	}
 
-	//t := strconv.Itoa(123)
-	s := strconv.Itoa(1)
+
 	key = args[0]
-	value = args[1] + " " + s
-	//value = value + " " + t
+	value = args[1]
 	err = stub.PutState(key, []byte(value)) //write the variable into the chaincode state
 	if err != nil {
 		return nil, err
